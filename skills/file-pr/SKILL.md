@@ -5,9 +5,15 @@ description: File a concise pull request. Use when the user asks to file, open, 
 
 # File PR
 
-Before filing, check whether a PR for this branch already exists. Review the
-diff locally against the base branch (usually `origin/main`) to make sure its
-contents match the goal.
+Before filing, identify the repository, branch, and intended base (usually
+`origin/main`). Check whether a PR for this branch already exists. Review the
+diff locally against that base, including the full stack when relevant, to make
+sure its contents match the goal. Keep unrelated local changes out.
+
+In T3 Code, call `link_pull_request` with the full URL as soon as a PR is
+created or work begins on an existing one. Link every stack layer you work on,
+then check `list_thread_pull_requests` before handing back. `gh` does not
+register a PR with the thread. Report linking failures.
 
 PR titles usually become commit messages, so follow the repository's title
 conventions. Look at recently merged PRs and Git history for examples. Prefer a
@@ -38,10 +44,15 @@ changes, for example `Created with <model> in <harness>.` Include subagent
 models that wrote part of the change. Use the model name the harness reports.
 If model identity is unavailable, name the harness without guessing a model.
 
+For screenshots, use a supported attachment route or an accessible image URL.
+A local file path in the PR body is not an uploaded image. Check that a
+reviewer can open it.
+
 Before submission, check the title, description, quotes, and attachments for
 secrets and private details.
 
-Open a real PR rather than a draft so review bots run. If `gh pr create` fails
+Follow the repository's draft policy and the user's requested state. Otherwise
+open a real PR rather than a draft so review bots run. If `gh pr create` fails
 because the GraphQL rate limit is used up, open it through REST with
 `gh api repos/<owner>/<repo>/pulls -f title=... -f head=... -f base=... -F body=@<file>`. If the user also asked
 to babysit it, continue with the `babysit-pr` skill.
