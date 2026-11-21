@@ -19,6 +19,10 @@ of scope creep and don't be scared to push back.
 - Extend to 5 only for security, permissions, auth, data loss, or
   state/concurrency, while a blocker or should stays open with evidence. Or when
   the user asks.
+- Hard cap: 5 rounds per change, counted across every agent, delegate and
+  session, including rounds run before a handover. Never give each delegate
+  its own budget. At the cap, stop reviewing: fix what is likely, record the
+  rest on the PR with a written reason, and hand back.
 - Stop early if a round returns only nits. Declined nits and comment,
   doc, or format-only fixes need no new round.
 - One reviewer only. Sol must not start subagents or reviewers.
